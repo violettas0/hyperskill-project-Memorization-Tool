@@ -32,8 +32,8 @@ def update_flashcard(item):
     item.answer = new_answer
     session.commit()
 
-def not_an_option(input):
-    print(f'{input} is not an option')
+def not_an_option(option):
+    print(f'{option} is not an option')
 
 while True:
     print('1. Add flashcards')
