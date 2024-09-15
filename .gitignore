@@ -1,0 +1,17 @@
+# course config files
+*.yaml
+
+# gradle
+.gradle/
+build
+
+
+# idea config
+.idea
+
+# old stages
+/Memorization Tool/*
+!/Memorization Tool/task/
+/Memorization Tool/task/*
+!/Memorization Tool/task/tool.py
+!/Memorization Tool/task/flashcard.db
