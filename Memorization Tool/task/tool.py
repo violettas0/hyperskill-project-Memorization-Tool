@@ -9,7 +9,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 class Flashcard(Base):
-    __tablename__ = 'flashcard.db'
+    __tablename__ = 'flashcard'
 
     id = Column(Integer, primary_key=True)
     question = Column(String)
@@ -32,6 +32,9 @@ def update_flashcard(item):
     item.answer = new_answer
     session.commit()
 
+def not_an_option(input):
+    print(f'{input} is not an option')
+
 while True:
     print('1. Add flashcards')
     print('2. Practice flashcards')
@@ -52,7 +55,7 @@ while True:
             elif new_choice == '2':
                 break
             else:
-                print(f'{new_choice} is not an option')
+                not_an_option(new_choice)
 
     elif choice == '2':
         flashcards = session.query(Flashcard).all()
@@ -74,11 +77,13 @@ while True:
                             if item.box_number == 3:
                                 session.delete(item)
                                 session.commit()
-                        if is_correct == 'n':
+                        elif is_correct == 'n':
                             if item.box_number > 1:
                                 item.box_number -= 1
                             else:
                                 pass
+                        else:
+                            not_an_option(is_correct)
                     elif new_choice == 'n':
                         pass
                     elif new_choice == 'u':
@@ -91,9 +96,9 @@ while True:
                         elif second_choice == 'e':
                             update_flashcard(item)
                         else:
-                            print(f'{second_choice} is not an option')
+                            not_an_option(second_choice)
                     else:
-                        print(f'{new_choice} is not an option')
+                        not_an_option(new_choice)
             else:
                 print('There is no flashcard to practice!')
             break
@@ -101,6 +106,6 @@ while True:
         print('Bye!')
         break
     else:
-        print(f'{choice} is not an option')
+        not_an_option(choice)
 
 
